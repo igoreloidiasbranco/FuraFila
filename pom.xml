@@ -10,9 +10,9 @@
 	</parent>
 	<groupId>br.com</groupId>
 	<artifactId>furafila</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>furafila</name>
-	<description>Demo project for Spring Boot</description>
+	<description>API Rest da aplicação FuraFila</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
