@@ -38,7 +38,7 @@ O seguinte projeto visa construir um aplicativo inovador na área gastronômica 
 
 ## Regras de negócio validadas pelo sistema
 
-- Horário das reservas entre 11:00 às 24:00 hrs.
+- Horário das reservas entre 11:00 às 22:00 hrs.
 - As reservas tem duração de 2 horas.
 - As reservas devem ser agendadas com antecedência mínima de 30 minutos.
 - Não permitir o agendamento de reservas com clientes inativos no sistema.
