@@ -18,6 +18,7 @@ public class Restaurante {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+    private String cnpj;
     private String email;
     private String telefone;
     @Enumerated(EnumType.STRING)
@@ -28,6 +29,7 @@ public class Restaurante {
 
     public Restaurante(RestauranteDTO dados) {
         this.nome = dados.nome();
+        this.cnpj = dados.cnpj();
         this.email = dados.email();
         this.telefone = dados.telefone();
         this.especialidade = dados.especialidade();
