@@ -3,6 +3,7 @@ package br.com.furafila.controller;
 import br.com.furafila.restaurante.Restaurante;
 import br.com.furafila.restaurante.RestauranteDTO;
 import br.com.furafila.restaurante.RestauranteRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +18,7 @@ public class RestauranteController {
     RestauranteRepository repository;
     @PostMapping
     @Transactional
-    public void cadastrar(@RequestBody RestauranteDTO restauranteDTO) {
+    public void cadastrar(@RequestBody @Valid RestauranteDTO restauranteDTO) {
         repository.save(new Restaurante(restauranteDTO));
     }
 }
