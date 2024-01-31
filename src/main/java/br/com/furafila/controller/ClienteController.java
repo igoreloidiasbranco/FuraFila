@@ -3,6 +3,7 @@ package br.com.furafila.controller;
 import br.com.furafila.cliente.Cliente;
 import br.com.furafila.cliente.ClienteDTO;
 import br.com.furafila.cliente.ClienteRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +19,7 @@ public class ClienteController {
 
     @PostMapping
     @Transactional
-    public void cadastrar (@RequestBody ClienteDTO clienteDTO) {
+    public void cadastrar (@RequestBody @Valid ClienteDTO clienteDTO) {
 
         repository.save(new Cliente(clienteDTO));
     }
