@@ -1,0 +1,1 @@
+alter table restaurantes add column cnpj varchar(18) not null after nome;
