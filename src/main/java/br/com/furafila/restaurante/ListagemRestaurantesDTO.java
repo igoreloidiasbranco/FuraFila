@@ -1,6 +1,6 @@
 package br.com.furafila.restaurante;
 
-import br.com.furafila.endereco.Endereco;
+import br.com.furafila.endereco.EnderecoDTO;
 
 
 public record ListagemRestaurantesDTO(
@@ -8,12 +8,21 @@ public record ListagemRestaurantesDTO(
         String email,
         String telefone,
         Especialidade especialidade,
-        Endereco endereco) {
+        EnderecoDTO endereco) {
 
     public ListagemRestaurantesDTO(Restaurante restaurante) {
         this(restaurante.getNome(), restaurante.getEmail(), restaurante.getTelefone(),
                 restaurante.getEspecialidade(),
-                restaurante.getEndereco());
+                new EnderecoDTO(
+                        restaurante.getEndereco().getLogradouro(),
+                        restaurante.getEndereco().getNumero(),
+                        restaurante.getEndereco().getComplemento(),
+                        restaurante.getEndereco().getBairro(),
+                        restaurante.getEndereco().getCep(),
+                        restaurante.getEndereco().getCidade(),
+                        restaurante.getEndereco().getUf()
+                )
+        );
     }
 
 
