@@ -6,6 +6,9 @@ import br.com.furafila.cliente.ClienteRepository;
 import br.com.furafila.cliente.ListagemClientesDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +28,7 @@ public class ClienteController {
     }
 
     @GetMapping
-    public List<ListagemClientesDTO> listar () {
-        return repository.findAll().stream().map(ListagemClientesDTO::new).toList();
+    public Page<ListagemClientesDTO> listar (@PageableDefault(size = 5, sort = {"nome"}) Pageable paginacao) {
+        return repository.findAll(paginacao).map(ListagemClientesDTO::new);
     }
 }
