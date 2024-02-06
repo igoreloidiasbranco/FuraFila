@@ -33,4 +33,17 @@ public class Cliente {
         this.datanascimento = clienteDTO.datanascimento();
         this.endereco = new Endereco(clienteDTO.endereco());
     }
+
+    public void atualizarCliente(DadosAtualizarClienteDTO dadosAtualizarClienteDTO) {
+        if(dadosAtualizarClienteDTO.telefone() != null) {
+            this.telefone = dadosAtualizarClienteDTO.telefone();
+        }
+        if(dadosAtualizarClienteDTO.email() != null) {
+            this.email = dadosAtualizarClienteDTO.email();
+        }
+
+        if(dadosAtualizarClienteDTO.endereco() != null) {
+            this.endereco.atualizarEndereco(dadosAtualizarClienteDTO.endereco());
+        }
+    }
 }
