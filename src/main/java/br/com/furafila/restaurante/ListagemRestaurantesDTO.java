@@ -4,6 +4,7 @@ import br.com.furafila.endereco.EnderecoDTO;
 
 
 public record ListagemRestaurantesDTO(
+        Long id,
         String nome,
         String email,
         String telefone,
@@ -11,7 +12,7 @@ public record ListagemRestaurantesDTO(
         EnderecoDTO endereco) {
 
     public ListagemRestaurantesDTO(Restaurante restaurante) {
-        this(restaurante.getNome(), restaurante.getEmail(), restaurante.getTelefone(),
+        this(restaurante.getId(), restaurante.getNome(), restaurante.getEmail(), restaurante.getTelefone(),
                 restaurante.getEspecialidade(),
                 new EnderecoDTO(
                         restaurante.getEndereco().getLogradouro(),
