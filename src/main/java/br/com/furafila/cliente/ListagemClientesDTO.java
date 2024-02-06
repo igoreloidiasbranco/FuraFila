@@ -3,6 +3,7 @@ package br.com.furafila.cliente;
 import br.com.furafila.endereco.EnderecoDTO;
 
 public record ListagemClientesDTO(
+        Long id,
         String nome,
         String email,
         String telefone,
@@ -10,6 +11,7 @@ public record ListagemClientesDTO(
 
     public ListagemClientesDTO(Cliente cliente) {
         this(
+                cliente.getId(),
                 cliente.getNome(),
                 cliente.getEmail(),
                 cliente.getTelefone(),
