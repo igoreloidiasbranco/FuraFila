@@ -1,9 +1,6 @@
 package br.com.furafila.controller;
 
-import br.com.furafila.cliente.Cliente;
-import br.com.furafila.cliente.ClienteDTO;
-import br.com.furafila.cliente.ClienteRepository;
-import br.com.furafila.cliente.ListagemClientesDTO;
+import br.com.furafila.cliente.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,7 +9,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+
 
 @RestController
 @RequestMapping("clientes")
@@ -31,4 +28,12 @@ public class ClienteController {
     public Page<ListagemClientesDTO> listar (@PageableDefault(size = 5, sort = {"nome"}) Pageable paginacao) {
         return repository.findAll(paginacao).map(ListagemClientesDTO::new);
     }
+
+    @PutMapping
+    @Transactional
+    public void atualizar(@RequestBody @Valid DadosAtualizarClienteDTO dadosAtualizarClienteDTO) {
+        var cliente = repository.getReferenceById(dadosAtualizarClienteDTO.id());
+        cliente.atualizarCliente(dadosAtualizarClienteDTO);
+    }
+
 }
