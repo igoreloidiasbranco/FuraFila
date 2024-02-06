@@ -36,4 +36,23 @@ public class Restaurante {
         this.capacidade = dados.capacidade();
         this.endereco = new Endereco(dados.endereco());
     }
+
+    public void atualizarRestaurante(DadosAtualizarRestauranteDTO dadosAtualizarRestauranteDTO) {
+        if(dadosAtualizarRestauranteDTO.email() != null) {
+            this.email = dadosAtualizarRestauranteDTO.email();
+        }
+        if(dadosAtualizarRestauranteDTO.telefone() != null) {
+            this.telefone = dadosAtualizarRestauranteDTO.telefone();
+        }
+        if(dadosAtualizarRestauranteDTO.especialidade() != null) {
+            this.especialidade = dadosAtualizarRestauranteDTO.especialidade();
+        }
+        if(dadosAtualizarRestauranteDTO.capacidade() != null) {
+            this.capacidade = dadosAtualizarRestauranteDTO.capacidade();
+        }
+
+        if(dadosAtualizarRestauranteDTO.endereco() != null) {
+            this.endereco.atualizarEndereco(dadosAtualizarRestauranteDTO.endereco());
+        }
+    }
 }
