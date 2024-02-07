@@ -26,6 +26,7 @@ public class Restaurante {
     private Integer capacidade;
     @Embedded
     private Endereco endereco;
+    private Boolean ativo;
 
     public Restaurante(RestauranteDTO dados) {
         this.nome = dados.nome();
@@ -35,6 +36,7 @@ public class Restaurante {
         this.especialidade = dados.especialidade();
         this.capacidade = dados.capacidade();
         this.endereco = new Endereco(dados.endereco());
+        this.ativo = true;
     }
 
     public void atualizarRestaurante(DadosAtualizarRestauranteDTO dadosAtualizarRestauranteDTO) {
@@ -54,5 +56,9 @@ public class Restaurante {
         if(dadosAtualizarRestauranteDTO.endereco() != null) {
             this.endereco.atualizarEndereco(dadosAtualizarRestauranteDTO.endereco());
         }
+    }
+
+    public void desativar() {
+        this.ativo = false;
     }
 }
