@@ -26,7 +26,7 @@ public class ClienteController {
 
     @GetMapping
     public Page<ListagemClientesDTO> listar (@PageableDefault(size = 5, sort = {"nome"}) Pageable paginacao) {
-        return repository.findAll(paginacao).map(ListagemClientesDTO::new);
+        return repository.findAllByAtivoTrue(paginacao).map(ListagemClientesDTO::new);
     }
 
     @PutMapping
@@ -36,4 +36,10 @@ public class ClienteController {
         cliente.atualizarCliente(dadosAtualizarClienteDTO);
     }
 
+    @DeleteMapping("{id}")
+    @Transactional
+    public void desativar(@PathVariable Long id) {
+        var cliente = repository.getReferenceById(id);
+        cliente.desativar();
+    }
 }
