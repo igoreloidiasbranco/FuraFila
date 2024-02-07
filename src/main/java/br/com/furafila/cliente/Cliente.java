@@ -24,6 +24,7 @@ public class Cliente {
     private String datanascimento;
     @Embedded
     private Endereco endereco;
+    private Boolean ativo;
 
     public Cliente(ClienteDTO clienteDTO) {
         this.nome = clienteDTO.nome();
@@ -32,6 +33,7 @@ public class Cliente {
         this.email = clienteDTO.email();
         this.datanascimento = clienteDTO.datanascimento();
         this.endereco = new Endereco(clienteDTO.endereco());
+        this.ativo = true;
     }
 
     public void atualizarCliente(DadosAtualizarClienteDTO dadosAtualizarClienteDTO) {
@@ -45,5 +47,9 @@ public class Cliente {
         if(dadosAtualizarClienteDTO.endereco() != null) {
             this.endereco.atualizarEndereco(dadosAtualizarClienteDTO.endereco());
         }
+    }
+
+    public void desativar() {
+        this.ativo = false;
     }
 }
