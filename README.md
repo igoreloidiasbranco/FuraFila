@@ -73,6 +73,7 @@ O seguinte projeto visa construir um aplicativo inovador na área gastronômica 
 Alexandre Gischkow Fattori;
 Igor Eloi Dias Branco;
 Paula Reis Colombo;
+Aglermeson Zampieri Martins de Lima.
 
 
 
