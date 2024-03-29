@@ -29,9 +29,15 @@ public class RestauranteController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<ListagemRestaurantesDTO>> listar(@PageableDefault(size = 5, sort = {"nome"} ) Pageable paginacao) {
+    public ResponseEntity<Page<ListagemRestaurantesDTO>> listar(@PageableDefault(size = 5, sort = {"nome"}) Pageable paginacao) {
         var page = repository.findAllByAtivoTrue(paginacao).map(ListagemRestaurantesDTO::new);
         return ResponseEntity.ok(page);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity detalhar(@PathVariable Long id) {
+        var restaurante = repository.getReferenceById(id);
+        return ResponseEntity.ok(new DadosDetalhamentoRestaurante(restaurante));
     }
 
     @PutMapping
@@ -42,7 +48,7 @@ public class RestauranteController {
         return ResponseEntity.ok(new DadosDetalhamentoRestaurante(restaurante));
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity desativar(@PathVariable Long id) {
         var restaurante = repository.getReferenceById(id);
