@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 
 @RestController
@@ -18,26 +20,40 @@ public class RestauranteController {
 
     @PostMapping
     @Transactional
-    public void cadastrar(@RequestBody @Valid RestauranteDTO restauranteDTO) {
-        repository.save(new Restaurante(restauranteDTO));
+    public ResponseEntity cadastrar(@RequestBody @Valid RestauranteDTO restauranteDTO, UriComponentsBuilder uriBuilder) {
+
+        var restaurante = new Restaurante(restauranteDTO);
+        repository.save(restaurante);
+        var uri = uriBuilder.path("/restaurantes/{id}").buildAndExpand(restaurante.getId()).toUri();
+        return ResponseEntity.created(uri).body(new DadosDetalhamentoRestaurante(restaurante));
     }
 
     @GetMapping
-    public Page<ListagemRestaurantesDTO> listar(@PageableDefault(size = 5, sort = {"nome"} ) Pageable paginacao) {
-        return repository.findAllByAtivoTrue(paginacao).map(ListagemRestaurantesDTO::new);
+    public ResponseEntity<Page<ListagemRestaurantesDTO>> listar(@PageableDefault(size = 5, sort = {"nome"}) Pageable paginacao) {
+        var page = repository.findAllByAtivoTrue(paginacao).map(ListagemRestaurantesDTO::new);
+        return ResponseEntity.ok(page);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity detalhar(@PathVariable Long id) {
+        var restaurante = repository.getReferenceById(id);
+        return ResponseEntity.ok(new DadosDetalhamentoRestaurante(restaurante));
     }
 
     @PutMapping
     @Transactional
-    public void atualizar(@RequestBody @Valid DadosAtualizarRestauranteDTO dadosAtualizarRestauranteDTO) {
+    public ResponseEntity atualizar(@RequestBody @Valid DadosAtualizarRestauranteDTO dadosAtualizarRestauranteDTO) {
         var restaurante = repository.getReferenceById(dadosAtualizarRestauranteDTO.id());
         restaurante.atualizarRestaurante(dadosAtualizarRestauranteDTO);
+        return ResponseEntity.ok(new DadosDetalhamentoRestaurante(restaurante));
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     @Transactional
-    public void desativar(@PathVariable Long id) {
+    public ResponseEntity desativar(@PathVariable Long id) {
         var restaurante = repository.getReferenceById(id);
         restaurante.desativar();
+
+        return ResponseEntity.noContent().build();
     }
 }
