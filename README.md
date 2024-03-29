@@ -69,8 +69,17 @@ O seguinte projeto visa construir um aplicativo inovador na área gastronômica 
 
 
 ## Pessoas autoras
+Aglermeson Zampieri Martins de Lima
+
+Alexandre Gischkow Fattori
 
 Igor Eloi Dias Branco
+
+Paula Reis Colombo
+
+Charles Anderson Silva de Amorim
+
+Alexandre Nobuyuki Yamaya
 
 
 
