@@ -33,6 +33,12 @@ public class ClienteController {
         return ResponseEntity.ok(page);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity detalhar(@PathVariable Long id) {
+        var cliente = repository.getReferenceById(id);
+        return ResponseEntity.ok(new DadosDetalhamentoCliente(cliente));
+    }
+
     @PutMapping
     @Transactional
     public ResponseEntity atualizar(@RequestBody @Valid DadosAtualizarClienteDTO dadosAtualizarClienteDTO) {
@@ -41,7 +47,7 @@ public class ClienteController {
         return ResponseEntity.ok().body(new DadosDetalhamentoCliente(cliente));
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity desativar(@PathVariable Long id) {
         var cliente = repository.getReferenceById(id);
