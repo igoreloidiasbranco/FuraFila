@@ -1,4 +1,4 @@
-package br.com.furafila.endereco;
+package br.com.furafila.domain.endereco;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;

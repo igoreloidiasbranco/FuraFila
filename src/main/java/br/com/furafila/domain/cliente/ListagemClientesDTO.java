@@ -1,6 +1,6 @@
-package br.com.furafila.cliente;
+package br.com.furafila.domain.cliente;
 
-import br.com.furafila.endereco.EnderecoDTO;
+import br.com.furafila.domain.endereco.EnderecoDTO;
 
 public record ListagemClientesDTO(
         Long id,

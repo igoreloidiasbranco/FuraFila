@@ -1,4 +1,4 @@
-package br.com.furafila.cliente;
+package br.com.furafila.domain.cliente;
 
 
 import org.springframework.data.domain.Page;

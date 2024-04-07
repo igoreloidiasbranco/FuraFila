@@ -1,6 +1,6 @@
-package br.com.furafila.restaurante;
+package br.com.furafila.domain.restaurante;
 
-import br.com.furafila.endereco.Endereco;
+import br.com.furafila.domain.endereco.Endereco;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

@@ -1,30 +1,27 @@
-package br.com.furafila.restaurante;
+package br.com.furafila.domain.cliente;
 
-import br.com.furafila.endereco.EnderecoDTO;
+import br.com.furafila.domain.endereco.EnderecoDTO;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public record RestauranteDTO(
+public record ClienteDTO(
         @NotBlank
         String nome,
 
         @NotBlank
-        String cnpj,
+        String cpf,
+
+        @NotBlank
+        String telefone,
 
         @NotBlank
         @Email
         String email,
 
         @NotBlank
-        String telefone,
-
-        @NotNull
-        Especialidade especialidade,
-
-        @NotNull
-        Integer capacidade,
+        String datanascimento,
 
         @NotNull
         @Valid

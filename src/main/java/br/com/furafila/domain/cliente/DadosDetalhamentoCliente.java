@@ -1,7 +1,6 @@
-package br.com.furafila.cliente;
+package br.com.furafila.domain.cliente;
 
-import br.com.furafila.endereco.Endereco;
-import jakarta.persistence.Embedded;
+import br.com.furafila.domain.endereco.Endereco;
 
 public record DadosDetalhamentoCliente(
         Long id,

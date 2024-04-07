@@ -1,4 +1,4 @@
-package br.com.furafila.restaurante;
+package br.com.furafila.domain.restaurante;
 
 
 
