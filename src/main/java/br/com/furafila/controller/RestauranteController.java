@@ -1,6 +1,6 @@
 package br.com.furafila.controller;
 
-import br.com.furafila.restaurante.*;
+import br.com.furafila.domain.restaurante.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

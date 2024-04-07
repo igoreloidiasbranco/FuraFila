@@ -1,4 +1,4 @@
-package br.com.furafila.endereco;
+package br.com.furafila.domain.endereco;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
