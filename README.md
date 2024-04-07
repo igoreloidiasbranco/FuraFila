@@ -73,18 +73,10 @@ Aglermeson Zampieri Martins de Lima
 
 Alexandre Gischkow Fattori
 
-Igor Eloi Dias Branco
-
-Paula Reis Colombo
+Alexandre Nobuyuki Yamaya
 
 Charles Anderson Silva de Amorim
 
-Alexandre Nobuyuki Yamaya
+Igor Eloi Dias Branco
 
-
-
-
-
-
-
-
+Paula Reis Colombo
