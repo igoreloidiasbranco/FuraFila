@@ -16,33 +16,33 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RequestMapping("clientes")
 public class ClienteController {
     @Autowired
-    ClienteRepository repository;
+    ClienteRepository clienteRepository;
 
     @PostMapping
     @Transactional
     public ResponseEntity cadastrar(@RequestBody @Valid ClienteDTO clienteDTO, UriComponentsBuilder uriBuilder) {
         var cliente = new Cliente(clienteDTO);
-        repository.save(cliente);
+        clienteRepository.save(cliente);
         var uri = uriBuilder.path("/clientes/{id}").buildAndExpand(cliente.getId()).toUri();
         return ResponseEntity.created(uri).body(new DadosDetalhamentoCliente(cliente));
     }
 
     @GetMapping
     public ResponseEntity<Page<ListagemClientesDTO>> listar(@PageableDefault(size = 5, sort = {"nome"}) Pageable paginacao) {
-        var page = repository.findAllByAtivoTrue(paginacao).map(ListagemClientesDTO::new);
+        var page = clienteRepository.findAllByAtivoTrue(paginacao).map(ListagemClientesDTO::new);
         return ResponseEntity.ok(page);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity detalhar(@PathVariable Long id) {
-        var cliente = repository.getReferenceById(id);
+        var cliente = clienteRepository.getReferenceById(id);
         return ResponseEntity.ok(new DadosDetalhamentoCliente(cliente));
     }
 
     @PutMapping
     @Transactional
     public ResponseEntity atualizar(@RequestBody @Valid DadosAtualizarClienteDTO dadosAtualizarClienteDTO) {
-        var cliente = repository.getReferenceById(dadosAtualizarClienteDTO.id());
+        var cliente = clienteRepository.getReferenceById(dadosAtualizarClienteDTO.id());
         cliente.atualizarCliente(dadosAtualizarClienteDTO);
         return ResponseEntity.ok().body(new DadosDetalhamentoCliente(cliente));
     }
@@ -50,7 +50,7 @@ public class ClienteController {
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity desativar(@PathVariable Long id) {
-        var cliente = repository.getReferenceById(id);
+        var cliente = clienteRepository.getReferenceById(id);
         cliente.desativar();
         return ResponseEntity.noContent().build();
     }
