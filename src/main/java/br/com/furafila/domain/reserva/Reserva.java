@@ -30,6 +30,8 @@ public class Reserva {
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
+    private Integer qtde;
+
     private LocalDateTime data;
 
 }
