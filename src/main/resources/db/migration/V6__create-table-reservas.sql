@@ -3,6 +3,7 @@ create table reservas(
     id bigint not null auto_increment,
     restaurante_id bigint not null,
     cliente_id bigint not null,
+    qtde int not null,
     data datetime not null,
 
     primary key(id),
