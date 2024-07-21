@@ -23,7 +23,7 @@ public class ReservaController {
     @Transactional
     public ResponseEntity reservar(@RequestBody @Valid ReservaDTO reservaDTO) {
 
-        reservaService.reservar(reservaDTO);
-        return ResponseEntity.ok(new DadosDetalhamentoReserva(null, null, null, null, null));
+       var detalhamentoReservaDTO = reservaService.reservar(reservaDTO);
+        return ResponseEntity.ok(detalhamentoReservaDTO);
     }
 }
