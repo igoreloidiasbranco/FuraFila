@@ -1,5 +1,6 @@
 package br.com.furafila.domain.reserva;
 
+import br.com.furafila.domain.restaurante.Especialidade;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.Min;
@@ -21,6 +22,8 @@ public record ReservaDTO(
         @NotNull
         @Future
         @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-        LocalDateTime data
+        LocalDateTime data,
+
+        Especialidade especialidade
 ) {
 }
