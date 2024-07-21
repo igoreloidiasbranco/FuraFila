@@ -12,4 +12,8 @@ public record DadosDetalhamentoReserva(
         @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
         LocalDateTime data
 ) {
+
+        public DadosDetalhamentoReserva(Reserva reserva) {
+                this(reserva.getId(), reserva.getRestaurante().getId(), reserva.getCliente().getId(), reserva.getQtde(), reserva.getData());
+        }
 }
