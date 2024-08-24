@@ -1,10 +1,7 @@
 package br.com.furafila.service;
 
 import br.com.furafila.domain.cliente.ClienteRepository;
-import br.com.furafila.domain.reserva.DadosDetalhamentoReserva;
-import br.com.furafila.domain.reserva.Reserva;
-import br.com.furafila.domain.reserva.ReservaDTO;
-import br.com.furafila.domain.reserva.ReservaRepository;
+import br.com.furafila.domain.reserva.*;
 import br.com.furafila.domain.reserva.validacoes.ValidadorDeReservas;
 import br.com.furafila.domain.restaurante.Restaurante;
 import br.com.furafila.domain.restaurante.RestauranteRepository;
@@ -28,6 +25,7 @@ public class ReservaService {
     @Autowired
     private List<ValidadorDeReservas> validadores;
 
+
     public DadosDetalhamentoReserva reservar(ReservaDTO reservaDTO) {
 
         if(!clienteRepository.existsById(reservaDTO.idCliente())) {
@@ -46,13 +44,13 @@ public class ReservaService {
             throw new ValidacaoException("Não há restaurante disponível no momento");
         }
         var cliente = clienteRepository.getReferenceById(reservaDTO.idCliente());
-        var reserva = new Reserva(null, restaurante, cliente, reservaDTO.qtde(), reservaDTO.data());
+        var reserva = new Reserva(null, restaurante, cliente, reservaDTO.qtde(), reservaDTO.data(), null);
         reservaRepository.save(reserva);
 
         return new DadosDetalhamentoReserva(reserva);
     }
 
-    private Restaurante escolherRestaurante(ReservaDTO reservaDTO) {
+    public Restaurante escolherRestaurante(ReservaDTO reservaDTO) {
 
         if (reservaDTO.idRestaurante() != null) {
             return restauranteRepository.getReferenceById(reservaDTO.idRestaurante());
@@ -62,7 +60,18 @@ public class ReservaService {
             throw new ValidacaoException("Especialidade é obrigatória quando o restaurante não for escolhido.");
         }
 
+        
+
         return restauranteRepository.escolherRestauranteAleatorioNaData(reservaDTO.especialidade(), reservaDTO.data());
 
+    }
+
+    public void cancelar(DadosCancelamentoReserva dadosCancelamentoReservaDTO) {
+        if (!reservaRepository.existsById(dadosCancelamentoReservaDTO.idReserva())) {
+            throw new ValidacaoException("Id da reserva informado não existe");
+        }
+
+        var reserva = reservaRepository.getReferenceById(dadosCancelamentoReservaDTO.idReserva());
+        reserva.cancelar(dadosCancelamentoReservaDTO.motivoCancelamento());
     }
 }
