@@ -1,16 +1,13 @@
 package br.com.furafila.controller;
 
-import br.com.furafila.domain.reserva.DadosDetalhamentoReserva;
+import br.com.furafila.domain.reserva.DadosCancelamentoReserva;
 import br.com.furafila.domain.reserva.ReservaDTO;
 import br.com.furafila.service.ReservaService;
-import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/reservas")
@@ -26,4 +23,12 @@ public class ReservaController {
        var detalhamentoReservaDTO = reservaService.reservar(reservaDTO);
         return ResponseEntity.ok(detalhamentoReservaDTO);
     }
+
+    @DeleteMapping
+    @Transactional
+    public ResponseEntity cancelar(@RequestBody @Valid DadosCancelamentoReserva dadosCancelamentoReservaDTO) {
+        reservaService.cancelar(dadosCancelamentoReservaDTO);
+        return ResponseEntity.noContent().build();
+    }
+
 }
