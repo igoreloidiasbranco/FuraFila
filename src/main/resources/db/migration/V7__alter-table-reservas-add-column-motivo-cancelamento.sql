@@ -1,0 +1,1 @@
+alter table reservas add column motivo_cancelamento varchar(100);
