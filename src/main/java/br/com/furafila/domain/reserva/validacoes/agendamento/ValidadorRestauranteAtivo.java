@@ -1,4 +1,4 @@
-package br.com.furafila.domain.reserva.validacoes;
+package br.com.furafila.domain.reserva.validacoes.agendamento;
 
 import br.com.furafila.domain.reserva.ReservaDTO;
 import br.com.furafila.domain.restaurante.RestauranteRepository;
