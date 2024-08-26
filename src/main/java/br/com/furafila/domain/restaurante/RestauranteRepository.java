@@ -22,6 +22,8 @@ public interface RestauranteRepository extends JpaRepository<Restaurante,Long> {
                 select rsv.restaurante.id from Reserva rsv
                 where
                 rsv.data = :data
+           and
+                rsv.motivoCancelamento is null
            )
            order by rand()
            limit 1
