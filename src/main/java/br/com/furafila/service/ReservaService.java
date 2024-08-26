@@ -2,7 +2,8 @@ package br.com.furafila.service;
 
 import br.com.furafila.domain.cliente.ClienteRepository;
 import br.com.furafila.domain.reserva.*;
-import br.com.furafila.domain.reserva.validacoes.ValidadorDeReservas;
+import br.com.furafila.domain.reserva.validacoes.agendamento.ValidadorDeReservas;
+import br.com.furafila.domain.reserva.validacoes.cancelamento.ValidadorCancelamentoDeReservas;
 import br.com.furafila.domain.restaurante.Restaurante;
 import br.com.furafila.domain.restaurante.RestauranteRepository;
 import br.com.furafila.exception.ValidacaoException;
@@ -25,6 +26,8 @@ public class ReservaService {
     @Autowired
     private List<ValidadorDeReservas> validadores;
 
+    @Autowired
+    private List<ValidadorCancelamentoDeReservas> validadoresCancelamento;
 
     public DadosDetalhamentoReserva reservar(ReservaDTO reservaDTO) {
 
@@ -70,6 +73,8 @@ public class ReservaService {
         if (!reservaRepository.existsById(dadosCancelamentoReservaDTO.idReserva())) {
             throw new ValidacaoException("Id da reserva informado não existe");
         }
+
+        validadoresCancelamento.forEach(v -> v.validar(dadosCancelamentoReservaDTO));
 
         var reserva = reservaRepository.getReferenceById(dadosCancelamentoReservaDTO.idReserva());
         reserva.cancelar(dadosCancelamentoReservaDTO.motivoCancelamento());
